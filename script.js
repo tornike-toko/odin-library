@@ -1,5 +1,5 @@
-const myLibrary = []
-const myelements = []
+let myLibrary = []
+let myelements = []
 
 const el_List = document.createElement("ul")
 
@@ -29,11 +29,22 @@ function subFun(event) {
     let author = document.querySelector("#author").value
     let pages = document.querySelector("#pages").value
     let haveRead = document.querySelector("#haveRead").checked
-    
-    addBookToLibrary(titel,author,pages,haveRead)
+
+    addBookToLibrary(titel, author, pages, haveRead)
 
     const form_wrapper = document.querySelector(".form-wrapper")
     form_wrapper.classList.add("d-none")
+}
+
+function removeFun(e) {
+    for(let i=0;i<myLibrary.length; i++){
+        if(myLibrary[i].id===e.target.id){
+            myLibrary.splice(i,1)
+            myelements.splice(i,1)
+        }
+    }
+
+    dispalyBooks()
 }
 
 function Book(id, titel, author, pages, haveRead) {
@@ -52,12 +63,14 @@ function Book(id, titel, author, pages, haveRead) {
 }
 
 function addElement() {
-    const BtnRemove = document.createElement("button")
-    BtnRemove.innerText = "x"
-
     i = (myelements.length - 1) + 1
+
+    const BtnRemove = document.createElement("button")
+    BtnRemove.setAttribute("id", `${myLibrary[i].id}`)
+    BtnRemove.innerText = "x"
+    BtnRemove.addEventListener("click", removeFun)
+
     myelements[i] = document.createElement("li")
-    myelements[i].setAttribute("id", `${myLibrary[i].id}`)
     myelements[i].innerText = myLibrary[i].info()
     myelements[i].append(BtnRemove)
 }
@@ -83,7 +96,7 @@ function dispalyBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
         el_List.append(myelements[i])
     }
-    console.log(myLibrary)
+    // console.log(myLibrary)
 }
 
 dispalyBooks()
