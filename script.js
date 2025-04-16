@@ -42,11 +42,17 @@ addBookToLibrary("Little Women", "Louisa May Alcott", 549, false)
 
 
 function dispalyBooks(){
+    const el_List = document.createElement("ul")
+    let doc_body = document.getElementsByTagName("body")[0]
     for (let i = 0; i < myLibrary.length; i++) {
-        let doc_body = document.getElementsByTagName("body")[0]
-        
-        doc_body.append(myelements[i])
+        el_List.append(myelements[i])
     }
+    doc_body.append(el_List)
 }
 
 dispalyBooks()
+/*
+gilaki wignis dasamateblad 
+froma monacemebis misagebadI
+formis damalva da gamochena gilakze dawerisas
+*/
