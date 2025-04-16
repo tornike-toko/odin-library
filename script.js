@@ -1,6 +1,12 @@
 const myLibrary = []
 const myelements = []
 
+const el_List = document.createElement("ul")
+
+let doc_body = document.querySelector("body")
+doc_body.append(el_List)
+
+
 const addBtn = document.querySelector("#new-book")
 addBtn.addEventListener("click", () => {
     const form_wrapper = document.querySelector(".form-wrapper")
@@ -11,6 +17,24 @@ close_form.addEventListener("click", () => {
     const form_wrapper = document.querySelector(".form-wrapper")
     form_wrapper.classList.add("d-none")
 })
+
+const BtnSub = document.querySelector("#sub-btn")
+
+
+BtnSub.addEventListener("click", subFun, false);
+
+function subFun(event) {
+    event.preventDefault();
+    let titel = document.querySelector("#title").value
+    let author = document.querySelector("#author").value
+    let pages = document.querySelector("#pages").value
+    let haveRead = document.querySelector("#haveRead").checked
+    
+    addBookToLibrary(titel,author,pages,haveRead)
+
+    const form_wrapper = document.querySelector(".form-wrapper")
+    form_wrapper.classList.add("d-none")
+}
 
 function Book(id, titel, author, pages, haveRead) {
     if (!new.target) {
@@ -42,6 +66,7 @@ function addBookToLibrary(titel, author, pages, haveRead) {
     id = crypto.randomUUID()
     myLibrary[(myLibrary.length - 1) + 1] = new Book(id, titel, author, pages, haveRead)
     addElement()
+    dispalyBooks()
 }
 
 
@@ -52,13 +77,13 @@ addBookToLibrary("Little Women", "Louisa May Alcott", 549, false)
 
 
 
+
 function dispalyBooks() {
-    const el_List = document.createElement("ul")
-    let doc_body = document.getElementsByTagName("body")[0]
+    el_List.innerHTML = ""
     for (let i = 0; i < myLibrary.length; i++) {
         el_List.append(myelements[i])
     }
-    doc_body.append(el_List)
+    console.log(myLibrary)
 }
 
 dispalyBooks()
