@@ -2,25 +2,18 @@ let myLibrary = []
 let myelements = []
 
 const el_List = document.createElement("ul")
-
-let doc_body = document.querySelector("body")
-doc_body.append(el_List)
-
+document.querySelector("body").append(el_List)
 
 const addBtn = document.querySelector("#new-book")
 addBtn.addEventListener("click", () => {
-    const form_wrapper = document.querySelector(".form-wrapper")
-    form_wrapper.classList.remove("d-none")
+    document.querySelector(".form-wrapper").classList.remove("d-none")
 })
 const close_form = document.querySelector("#close-form")
 close_form.addEventListener("click", () => {
-    const form_wrapper = document.querySelector(".form-wrapper")
-    form_wrapper.classList.add("d-none")
+    document.querySelector(".form-wrapper").classList.add("d-none")
 })
 
 const BtnSub = document.querySelector("#sub-btn")
-
-
 BtnSub.addEventListener("click", subFun, false);
 
 function subFun(event) {
@@ -32,15 +25,14 @@ function subFun(event) {
 
     addBookToLibrary(titel, author, pages, haveRead)
 
-    const form_wrapper = document.querySelector(".form-wrapper")
-    form_wrapper.classList.add("d-none")
+    document.querySelector(".form-wrapper").classList.add("d-none")
 }
 
 function removeFun(e) {
-    for(let i=0;i<myLibrary.length; i++){
-        if(myLibrary[i].id===e.target.id){
-            myLibrary.splice(i,1)
-            myelements.splice(i,1)
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].id === e.target.id) {
+            myLibrary.splice(i, 1)
+            myelements.splice(i, 1)
         }
     }
 
@@ -57,13 +49,11 @@ function Book(id, titel, author, pages, haveRead) {
     this.pages = pages;
     this.haveRead = haveRead;
 
-    this.info = function () {
-        return `The "${this.titel}" by ${this.author}, ${this.pages} pages, ${this.haveRead ? "have read" : "not have read"}`
-    }
+    this.info = () => { return `The "${this.titel}" by ${this.author}, ${this.pages} pages, ${this.haveRead ? "have read" : "not have read"}` }
 }
 
 function addElement() {
-    i = (myelements.length - 1) + 1
+    i = myelements.length
 
     const BtnRemove = document.createElement("button")
     BtnRemove.setAttribute("id", `${myLibrary[i].id}`)
@@ -77,26 +67,19 @@ function addElement() {
 
 function addBookToLibrary(titel, author, pages, haveRead) {
     id = crypto.randomUUID()
-    myLibrary[(myLibrary.length - 1) + 1] = new Book(id, titel, author, pages, haveRead)
+    myLibrary[myLibrary.length] = new Book(id, titel, author, pages, haveRead)
     addElement()
     dispalyBooks()
 }
-
-
-addBookToLibrary("To kill a Mockingbird", "Harper Lee", 281, false)
-addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 208, true)
-addBookToLibrary("The Hobbit", "J.R.R Tolkien", 320, true)
-addBookToLibrary("Little Women", "Louisa May Alcott", 549, false)
-
-
-
 
 function dispalyBooks() {
     el_List.innerHTML = ""
     for (let i = 0; i < myLibrary.length; i++) {
         el_List.append(myelements[i])
     }
-    // console.log(myLibrary)
 }
 
-dispalyBooks()
+addBookToLibrary("To kill a Mockingbird", "Harper Lee", 281, false)
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 208, true)
+addBookToLibrary("The Hobbit", "J.R.R Tolkien", 320, true)
+addBookToLibrary("Little Women", "Louisa May Alcott", 549, false)
