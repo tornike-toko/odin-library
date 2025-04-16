@@ -1,6 +1,17 @@
 const myLibrary = []
 const myelements = []
 
+const addBtn = document.querySelector("#new-book")
+addBtn.addEventListener("click", () => {
+    const form_wrapper = document.querySelector(".form-wrapper")
+    form_wrapper.classList.remove("d-none")
+})
+const close_form = document.querySelector("#close-form")
+close_form.addEventListener("click", () => {
+    const form_wrapper = document.querySelector(".form-wrapper")
+    form_wrapper.classList.add("d-none")
+})
+
 function Book(id, titel, author, pages, haveRead) {
     if (!new.target) {
         throw Error("You must use the 'new' operator to call the constructor")
@@ -16,11 +27,11 @@ function Book(id, titel, author, pages, haveRead) {
     }
 }
 
-function addElement(){
+function addElement() {
     const BtnRemove = document.createElement("button")
     BtnRemove.innerText = "x"
 
-    i = (myelements.length -1) + 1
+    i = (myelements.length - 1) + 1
     myelements[i] = document.createElement("li")
     myelements[i].setAttribute("id", `${myLibrary[i].id}`)
     myelements[i].innerText = myLibrary[i].info()
@@ -41,7 +52,7 @@ addBookToLibrary("Little Women", "Louisa May Alcott", 549, false)
 
 
 
-function dispalyBooks(){
+function dispalyBooks() {
     const el_List = document.createElement("ul")
     let doc_body = document.getElementsByTagName("body")[0]
     for (let i = 0; i < myLibrary.length; i++) {
@@ -51,8 +62,3 @@ function dispalyBooks(){
 }
 
 dispalyBooks()
-/*
-gilaki wignis dasamateblad 
-froma monacemebis misagebadI
-formis damalva da gamochena gilakze dawerisas
-*/
